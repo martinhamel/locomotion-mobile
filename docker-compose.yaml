@@ -1,0 +1,10 @@
+version: "3.6"
+services:
+  app:
+    build:
+      context: .
+    volumes:
+      - .:/workspace
+    ports:
+      - 19002:19002
+
