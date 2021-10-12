@@ -1,7 +1,5 @@
 import { Button, TextInput, StyleSheet, Text, View } from "react-native";
-import React, { useState, Dispatch, SetStateAction, useContext } from "react";
-import axios, { AxiosResponse } from "axios";
-import { AppContext } from "../App";
+import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import useLogin from "./hooks/useLogin";
 
@@ -35,8 +33,11 @@ const styles = StyleSheet.create({
     width: 250,
   },
   login: {
-    backgroundColor: "#fff",
-  },
+      flex: 1,
+      backgroundColor: "#fff",
+      alignItems: "center",
+      justifyContent: "center",
+    },
 });
 
 export default Login;
