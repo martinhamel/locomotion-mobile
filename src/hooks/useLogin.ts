@@ -1,9 +1,9 @@
-import axios, { AxiosResponse } from "axios";
-import { Dispatch, SetStateAction, useContext, useEffect } from "react";
+import axios from "axios";
+import { useContext } from "react";
 import { AppContext } from "../../App";
 import { useToast } from "react-native-toast-notifications";
 
-const useLogin = (navigation) => {
+const useLogin = () => {
   const toast = useToast();
   const { setTokens } = useContext(AppContext) as AppContextType;
 
@@ -18,10 +18,9 @@ const useLogin = (navigation) => {
         }
       );
       setTokens(tokens);
-      toast.show("Connexion réussie", {type: 'success'})
-      navigation.push("Home")
+      toast.show("Connexion réussie", { type: "success" });
     } catch (e) {
-      toast.show("Connexion non réussie", {type: 'warning'})
+      toast.show("Connexion non réussie", { type: "warning" });
       console.log(e);
     }
   };

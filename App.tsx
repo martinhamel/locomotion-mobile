@@ -13,28 +13,15 @@ export const AppContext = createContext<AppContextType | null>(null);
 const App = () => {
   const [tokens, setTokens] = useState<Tokens>();
   const user = useUser(tokens);
+  const screen = tokens ? <Home /> : <Login />;
 
   return (
     <ToastProvider>
-        <AppContext.Provider value={{ tokens, setTokens }}>
-          <NavigationContainer>
-            <Stack.Navigator>
-              <Stack.Screen
-                name="Login"
-                component={Login}
-                options={{ title: "Connexion" }}
-              />
-              <Stack.Screen
-                name="Home"
-                component={Home}
-                options={{ title: "Locomotion" }}
-              />
-            </Stack.Navigator>
-          </NavigationContainer>
-        </AppContext.Provider>
+      <AppContext.Provider value={{ tokens, setTokens }}>
+        {screen}
+      </AppContext.Provider>
     </ToastProvider>
   );
 };
-
 
 export default App;

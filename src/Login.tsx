@@ -3,10 +3,10 @@ import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import useLogin from "./hooks/useLogin";
 
-const Login = ({ navigation }) => {
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const login = useLogin(navigation);
+  const login = useLogin();
 
   return (
     <View style={styles.login}>
