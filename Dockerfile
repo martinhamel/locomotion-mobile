@@ -1,6 +1,6 @@
 FROM node:16
 WORKDIR /workspace
 
-RUN npm i --unsafe-perm -g expo-cli
+RUN npm i -g expo-cli
 
-CMD expo start
+CMD bash -c "npm i && expo start --port=19000"
