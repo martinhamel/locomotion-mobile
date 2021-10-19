@@ -3,4 +3,4 @@ WORKDIR /workspace
 
 RUN npm i -g expo-cli
 
-CMD bash -c "npm i && expo start --port=19000"
+CMD bash -c "npm i && expo start"

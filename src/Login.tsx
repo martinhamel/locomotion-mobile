@@ -7,7 +7,6 @@ import {
 } from "react-native";
 import { Card, Button } from "react-native-elements";
 import React, { useState } from "react";
-import { StatusBar } from "expo-status-bar";
 import useLogin from "./hooks/useLogin";
 
 const Login = () => {
@@ -36,7 +35,6 @@ const Login = () => {
             secureTextEntry={true}
           />
           <Button title="connexion" onPress={() => login(email, password)} />
-          <StatusBar style="auto" />
         </View>
       </Card>
     </ImageBackground>
@@ -54,7 +52,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     padding: 10,
-    margin: "0, 10",
   },
   card: {
     backgroundColor: "rgba(256, 256, 256, 0.95)",
