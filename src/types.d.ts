@@ -19,5 +19,6 @@ type User = {
 
 type AppContextType = {
     tokens: Tokens | undefined,
-    setTokens: (Tokens) => void
+    setTokens: (Tokens) => void,
+    user: User | undefined
 }
