@@ -2,6 +2,7 @@ import axios from "axios";
 import { useContext, useEffect } from "react";
 import { AppContext } from "../../App";
 import { useToast } from "react-native-toast-notifications";
+import config from '../config'
 
 const useLogin = () => {
   const toast = useToast();
@@ -11,7 +12,7 @@ const useLogin = () => {
     if (!tokens) {
       try {
         const { data: tokens } = await axios.post(
-          "http://localhost:8010/proxy/api/v1/auth/login",
+          `${config.API_URL}/api/v1/auth/login`,
           {
             email,
             password,

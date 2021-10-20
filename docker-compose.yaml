@@ -4,7 +4,7 @@ services:
     build:
       context: .
     volumes:
-      - .:/workspace
+      - .:/workspace:z
     network_mode: host
 
 

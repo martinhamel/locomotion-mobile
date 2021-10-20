@@ -1,0 +1,8 @@
+{
+  "production": {
+    "API_URL": "https://api.locomotion.app"
+  },
+  "development": {
+    "API_URL": "http://192.168.86.51:8010/proxy/"
+  }
+}

@@ -15,6 +15,12 @@ type User = {
   phone?: string;
   other_phone?: string;
   role?: string;
+  avatar?: {
+    url: string,
+    sizes?: {
+      thumbnail?: string
+    }
+  };
 };
 
 type AppContextType = {
