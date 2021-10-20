@@ -16,15 +16,15 @@ type User = {
   other_phone?: string;
   role?: string;
   avatar?: {
-    url: string,
+    url: string;
     sizes?: {
-      thumbnail?: string
-    }
+      thumbnail?: string;
+    };
   };
 };
 
 type AppContextType = {
-    tokens: Tokens | undefined,
-    setTokens: (Tokens) => void,
-    user: User | undefined
-}
+  tokens: Tokens | undefined;
+  setTokens: (Tokens) => void;
+  user: User | undefined;
+};

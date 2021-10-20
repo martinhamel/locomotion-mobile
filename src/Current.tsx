@@ -14,8 +14,8 @@ const Current = () => {
 
 const styles = StyleSheet.create({
   current: {
-    margin: 10
-  }
-})
+    margin: 10,
+  },
+});
 
 export default Current;

@@ -6,5 +6,3 @@ services:
     volumes:
       - .:/workspace:z
     network_mode: host
-
-

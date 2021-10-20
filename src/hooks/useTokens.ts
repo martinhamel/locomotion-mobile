@@ -3,18 +3,17 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const useTokens = (): [Tokens | undefined, (tokens: Tokens) => void] => {
   const [tokens, setTokens] = useState<Tokens>();
-  useEffect(() => {    
-    (async() => {
+  useEffect(() => {
+    (async () => {
       const tokensString = await AsyncStorage.getItem("tokens");
-      if(tokensString){
+      if (tokensString) {
         const oldTokens = JSON.parse(tokensString);
         setTokens(oldTokens);
       }
-    })()
+    })();
+  }, [tokens?.access_token]);
 
-  }, [tokens?.access_token])
-  
-  const setTokens2 = (tokens: Tokens) => {    
+  const setTokens2 = (tokens: Tokens) => {
     AsyncStorage.setItem("tokens", JSON.stringify(tokens));
     setTokens(tokens);
   };
