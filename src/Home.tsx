@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   activity: {
-    // height: '100%'
+    height: '100%'
   }
 });
 
