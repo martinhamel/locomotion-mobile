@@ -12,6 +12,7 @@ import { Avatar } from "react-native-elements";
 import { AppContext } from "../AppContext";
 import "react-native-gesture-handler";
 import { Icon } from "react-native-elements/dist/icons/Icon";
+import Reserve from "./Reserve";
 
 const Drawer = createDrawerNavigator();
 
@@ -46,6 +47,11 @@ const Home = () => {
           name="Start"
           component={Start}
           options={{ title: "Locomotion" }}
+        />
+        <Drawer.Screen
+          name="Reserve"
+          component={Reserve}
+          options={{ title: "Réservez" }}
         />
       </Drawer.Navigator>
     </NavigationContainer>

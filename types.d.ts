@@ -23,6 +23,22 @@ type User = {
   };
 };
 
+type Loanable = {
+  id: number,
+  name: string,
+  type: string,
+  position_google: {
+    lat: number,
+    lng: number
+  },
+  image: {
+    url,
+    sizes: {
+      thumbnail: string
+    }
+  }
+}
+
 type AppContextType = {
   tokens: Tokens | null;
   setTokens: (token: Tokens | null) => void;
