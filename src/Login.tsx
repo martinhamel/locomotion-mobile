@@ -12,7 +12,7 @@ import useLogin from "./hooks/useLogin";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const login = useLogin();
+  const {login, loading} = useLogin();
 
   return (
     <ImageBackground
@@ -34,7 +34,7 @@ const Login = () => {
             onChangeText={setPassword}
             secureTextEntry={true}
           />
-          <Button title="connexion" onPress={() => login(email, password)} />
+          <Button title="connexion" disabled={loading} onPress={() => login(email, password)} />
         </View>
       </Card>
     </ImageBackground>

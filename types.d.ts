@@ -27,4 +27,5 @@ type AppContextType = {
   tokens: Tokens | undefined;
   setTokens: (Tokens) => void;
   user: User | undefined;
+  loadingUser: boolean
 };

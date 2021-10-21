@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import Start from "./Start";
 import {
@@ -11,22 +11,27 @@ import {
 import { Avatar } from "react-native-elements";
 import { AppContext } from "../AppContext";
 import "react-native-gesture-handler";
+import { Icon } from "react-native-elements/dist/icons/Icon";
 
 const Drawer = createDrawerNavigator();
 
 const Home = () => {
-  const { user, setTokens } = useContext(AppContext) as AppContextType;
+  const { user, loadingUser, setTokens } = useContext(AppContext) as AppContextType;
 
-  return (
+  const content = loadingUser ? <ActivityIndicator style={styles.activity}/> : (
     <NavigationContainer>
       <Drawer.Navigator
         drawerContent={(props) => (
           <DrawerContentScrollView>
             <DrawerItemList {...props} />
-            <DrawerItem label="déconnexion" onPress={() => setTokens(null)} />
+            <DrawerItem
+              label="déconnexion"
+              icon={() => <Icon name="logout" />}
+              onPress={() => setTokens(null)}
+            />
           </DrawerContentScrollView>
         )}
-        screenOptions={({navigation}) => ({
+        screenOptions={({ navigation }) => ({
           headerLeft: () => (
             <Avatar
               containerStyle={styles.avatar}
@@ -45,6 +50,8 @@ const Home = () => {
       </Drawer.Navigator>
     </NavigationContainer>
   );
+
+  return content
 };
 
 const styles = StyleSheet.create({
@@ -57,6 +64,9 @@ const styles = StyleSheet.create({
   avatar: {
     marginLeft: 10,
   },
+  activity: {
+    // height: '100%'
+  }
 });
 
 export default Home;

@@ -1,14 +1,16 @@
 import axios from "axios";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../AppContext";
 import { useToast } from "react-native-toast-notifications";
 import config from "../config";
 
 const useLogin = () => {
   const toast = useToast();
+  const [loading, setLoading] = useState(false);
   const { tokens, setTokens } = useContext(AppContext) as AppContextType;
 
-  return async (email: string, password: string) => {
+  const login = async (email: string, password: string) => {
+    setLoading(true);
     if (!tokens) {
       try {
         const { data: tokens } = await axios.post(
@@ -19,14 +21,17 @@ const useLogin = () => {
             rememberMe: false,
           }
         );
+        setLoading(false);
         setTokens(tokens);
         toast.show("Connexion réussie", { type: "success" });
       } catch (e) {
         toast.show("Connexion non réussie", { type: "warning" });
         console.log(e);
-      }
+      } 
     }
   };
+
+  return {login, loading};
 };
 
 export default useLogin;

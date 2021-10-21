@@ -7,7 +7,7 @@ const Start = () => {
 
   return (
     <View style={styles.start}>
-      <Text>bonjour, {user?.name}</Text>
+      <Text>Bienvenue {user?.name},</Text>
     </View>
   );
 };
