@@ -5,13 +5,13 @@ import useUser from "./src/hooks/useUser";
 import { ToastProvider } from "react-native-toast-notifications";
 import useTokens from "./src/hooks/useTokens";
 import { AppContext } from "./AppContext";
-import { ActivityIndicator } from "react-native";
+import { ActivityIndicator, StyleSheet } from "react-native";
 
 const App = () => {
   const [tokens, setTokens, loadingToken] = useTokens();
-  const [user, loadingUser] = useUser(tokens);
+  const [user, loadingUser] = useUser(tokens, setTokens);
   const screen = tokens ? <Home /> : <Login />;
-  const content = loadingToken ? <ActivityIndicator /> : screen;
+  const content = loadingToken ? <ActivityIndicator color='#0000ff' style={styles.activity}/> : screen;
 
   return (
     <ToastProvider>
@@ -21,5 +21,12 @@ const App = () => {
     </ToastProvider>
   );
 };
+
+const styles = StyleSheet.create({
+  activity: {
+    height: '100%'
+  }
+});
+
 
 export default App;

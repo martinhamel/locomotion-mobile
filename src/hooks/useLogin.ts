@@ -13,7 +13,7 @@ const useLogin = () => {
     setLoading(true);
     if (!tokens) {
       try {
-        const { data: tokens } = await axios.post(
+        const { data: tokens } : {data: Tokens} = await axios.post(
           `${config.API_URL}/api/v1/auth/login`,
           {
             email,

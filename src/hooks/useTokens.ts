@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const useTokens = (): [Tokens | undefined, (tokens: Tokens) => void, boolean] => {
-  const [tokens, setTokens] = useState<Tokens>();
+const useTokens = (): [Tokens | null, (tokens: Tokens | null) => void, boolean] => {
+  const [tokens, setTokens] = useState<Tokens | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   useEffect(() => {
     (async () => {
@@ -15,7 +15,7 @@ const useTokens = (): [Tokens | undefined, (tokens: Tokens) => void, boolean] =>
     })();
   }, [tokens?.access_token]);
 
-  const setTokens2 = (tokens: Tokens) => {
+  const setTokens2 = (tokens: Tokens | null) => {
     setLoading(true);
     AsyncStorage.setItem("tokens", JSON.stringify(tokens));
     setTokens(tokens);

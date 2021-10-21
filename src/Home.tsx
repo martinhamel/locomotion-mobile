@@ -18,7 +18,7 @@ const Drawer = createDrawerNavigator();
 const Home = () => {
   const { user, loadingUser, setTokens } = useContext(AppContext) as AppContextType;
 
-  const content = loadingUser ? <ActivityIndicator style={styles.activity}/> : (
+  const content = loadingUser ? <ActivityIndicator style={styles.activity} color='#0000ff'/> : (
     <NavigationContainer>
       <Drawer.Navigator
         drawerContent={(props) => (
@@ -43,7 +43,7 @@ const Home = () => {
         })}
       >
         <Drawer.Screen
-          name="Home"
+          name="Start"
           component={Start}
           options={{ title: "Locomotion" }}
         />
