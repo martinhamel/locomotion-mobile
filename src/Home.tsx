@@ -1,30 +1,39 @@
 import React, { useContext } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 import Current from "./Current";
-import { createDrawerNavigator } from "@react-navigation/drawer";
+import {
+  createDrawerNavigator,
+  DrawerContentScrollView,
+  DrawerItem,
+} from "@react-navigation/drawer";
 import { Button, Icon, Avatar } from "react-native-elements";
-import { AppContext } from "../App";
+import { AppContext } from "../AppContext";
 import "react-native-gesture-handler";
 
 const Drawer = createDrawerNavigator();
 
 const Home = () => {
-  const { user } = useContext(AppContext) as AppContextType;
+  const { user, setTokens } = useContext(AppContext) as AppContextType;
 
   return (
     <NavigationContainer>
       <Drawer.Navigator
-        screenOptions={{
-          headerLeft: (props) => (
+        drawerContent={({ }) => (
+          <DrawerContentScrollView>
+            <DrawerItem label="déconnexion" onPress={() => setTokens(null)} />
+          </DrawerContentScrollView>
+        )}
+        screenOptions={({navigation}) => ({
+          headerLeft: () => (
             <Avatar
               containerStyle={styles.avatar}
               rounded
               source={{ uri: user?.avatar?.sizes?.thumbnail }}
+              onPress={() => navigation.toggleDrawer()}
             />
           ),
-        }}
+        })}
       >
         <Drawer.Screen
           name="Home"

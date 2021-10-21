@@ -4,8 +4,7 @@ import Home from "./src/Home";
 import useUser from "./src/hooks/useUser";
 import { ToastProvider } from "react-native-toast-notifications";
 import useTokens from "./src/hooks/useTokens";
-
-export const AppContext = createContext<AppContextType | null>(null);
+import { AppContext } from "./AppContext";
 
 const App = () => {
   const [tokens, setTokens] = useTokens();

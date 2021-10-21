@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Text, View, StyleSheet } from "react-native";
-import { AppContext } from "../App";
+import { AppContext } from "../AppContext";
 
 const Current = () => {
   const { user } = useContext(AppContext) as AppContextType;

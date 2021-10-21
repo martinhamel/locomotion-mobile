@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useContext, useEffect } from "react";
-import { AppContext } from "../../App";
+import { AppContext } from "../../AppContext";
 import { useToast } from "react-native-toast-notifications";
 import config from "../config";
 
