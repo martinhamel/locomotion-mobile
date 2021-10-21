@@ -6,8 +6,9 @@ import {
   createDrawerNavigator,
   DrawerContentScrollView,
   DrawerItem,
+  DrawerItemList,
 } from "@react-navigation/drawer";
-import { Button, Icon, Avatar } from "react-native-elements";
+import { Avatar } from "react-native-elements";
 import { AppContext } from "../AppContext";
 import "react-native-gesture-handler";
 
@@ -19,8 +20,9 @@ const Home = () => {
   return (
     <NavigationContainer>
       <Drawer.Navigator
-        drawerContent={({ }) => (
+        drawerContent={(props) => (
           <DrawerContentScrollView>
+            <DrawerItemList {...props} />
             <DrawerItem label="déconnexion" onPress={() => setTokens(null)} />
           </DrawerContentScrollView>
         )}
@@ -38,7 +40,7 @@ const Home = () => {
         <Drawer.Screen
           name="Home"
           component={Current}
-          options={{ title: "Bienvenue!" }}
+          options={{ title: "Locomotion" }}
         />
       </Drawer.Navigator>
     </NavigationContainer>
