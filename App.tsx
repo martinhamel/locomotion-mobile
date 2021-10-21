@@ -5,11 +5,18 @@ import useUser from "./src/hooks/useUser";
 import { ToastProvider } from "react-native-toast-notifications";
 import useTokens from "./src/hooks/useTokens";
 import { AppContext } from "./AppContext";
-import { ActivityIndicator, StyleSheet } from "react-native";
+import { ActivityIndicator, StyleSheet, Text } from "react-native";
+import { useFonts } from 'expo-font';
+
 
 const App = () => {
   const [tokens, setTokens, loadingToken] = useTokens();
   const [user, loadingUser] = useUser(tokens, setTokens);
+  const [fontsLoaded] = useFonts({
+    'Brandon-regular': require('./assets/fonts/BrandonText-Regular.otf') 
+  })
+
+  
   const screen = tokens ? <Home /> : <Login />;
   const content = loadingToken ? <ActivityIndicator color='#0000ff' style={styles.activity}/> : screen;
 
@@ -25,7 +32,7 @@ const App = () => {
 const styles = StyleSheet.create({
   activity: {
     height: '100%'
-  }
+  },
 });
 
 
