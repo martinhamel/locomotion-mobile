@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
-import Current from "./Current";
+import Start from "./Start";
 import {
   createDrawerNavigator,
   DrawerContentScrollView,
@@ -39,7 +39,7 @@ const Home = () => {
       >
         <Drawer.Screen
           name="Home"
-          component={Current}
+          component={Start}
           options={{ title: "Locomotion" }}
         />
       </Drawer.Navigator>
