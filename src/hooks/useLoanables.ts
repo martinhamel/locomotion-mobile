@@ -12,15 +12,14 @@ const useLoanables = () => {
       const {
         data: { data: loanables },
       }: { data: { data: [Loanable] } } = await axios.get(
-        `${config.API_URL}/api/v1/loanables?order=name&page=1&per_page=10&q=&fields=id,type,name,position_google,available,owner.user.id,owner.user.name,owner.user.full_name,owner.user.avatar,image.*`,
+        `${config.API_URL}/api/v1/loanables?order=name&page=1&per_page=1000&q=&fields=id,type,name,position_google,available,owner.user.id,owner.user.name,owner.user.full_name,owner.user.avatar,image.*`,
         {
           headers: {
             Authorization: `Bearer ${tokens?.access_token}`,
           },
         }
       );
-      setLoanables(loanables);
-      console.log(loanables);
+      setLoanables(loanables);      
     })();
   }, [tokens?.access_token]);
   return loanables;
