@@ -1,7 +1,14 @@
 import React from "react";
-import { View, Image, StyleSheet, Dimensions } from "react-native";
+import {
+  View,
+  Image,
+  Text,
+  StyleSheet,
+  Dimensions,
+  ActivityIndicator,
+} from "react-native";
 import useLoanables from "./hooks/useLoanables";
-import MapView, { Marker } from "react-native-maps";
+import MapView, { Callout, Marker } from "react-native-maps";
 
 const getImage = (l: Loanable) => {
   if (l.type === "bike") return require("../assets/pins/bike-pin.png");
@@ -10,22 +17,39 @@ const getImage = (l: Loanable) => {
 };
 
 export default () => {
-  const loanables = useLoanables();
+  const {loanables, loading: loadingLoanables} = useLoanables();
 
-  const markers = loanables.map((l) => (
-    <Marker
-      coordinate={{
-        latitude: l.position_google.lat,
-        longitude: l.position_google.lng,
-      }}
-      key={l.id}
-      title={l.name}
-    >
-      <Image height={5} source={getImage(l)} />
-    </Marker>
-  ));
+  const loading = loadingLoanables ? (
+    <ActivityIndicator style={styles.activity} color="#0000ff" />
+  ) : null;
+
+  const markers = loanables
+    ? loanables.map((l) => (
+        <Marker
+          coordinate={{
+            latitude: l.position_google.lat,
+            longitude: l.position_google.lng,
+          }}
+          key={l.id}
+          title={l.name}
+        >
+          <Image
+            height={43}
+            width={30}
+            source={getImage(l)}
+            resizeMode="contain"
+          />
+          <Callout>
+            <View>
+              <Text>{l.name}</Text>
+            </View>
+          </Callout>
+        </Marker>
+      ))
+    : null;
   return (
     <View style={styles.container}>
+      {loading}
       <MapView
         style={styles.map}
         initialRegion={{
@@ -52,5 +76,10 @@ const styles = StyleSheet.create({
   map: {
     width: Dimensions.get("window").width,
     height: Dimensions.get("window").height,
+  },
+  activity: {
+    height: "100%",
+    position: "absolute",
+    zIndex: 99
   },
 });
