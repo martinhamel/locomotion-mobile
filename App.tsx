@@ -9,7 +9,9 @@ import { ActivityIndicator, StyleSheet, Text } from "react-native";
 import { useFonts } from "expo-font";
 
 const App = () => {
-  const [tokens, setTokens, loadingToken] = useTokens();
+  console.log('111');
+  
+  const [tokens, setTokens] = useTokens();
   const [user, loadingUser] = useUser(tokens, setTokens);
   const [fontsLoaded] = useFonts({
     "Brandon-regular": require("./assets/fonts/BrandonText-Regular.otf"),
@@ -17,16 +19,11 @@ const App = () => {
   });
 
   const screen = tokens ? <Home /> : <Login />;
-  const content = loadingToken ? (
-    <ActivityIndicator color="#0000ff" style={styles.activity} />
-  ) : (
-    screen
-  );
 
   return (
     <ToastProvider>
       <AppContext.Provider value={{ tokens, setTokens, user, loadingUser }}>
-        {content}
+        {screen}
       </AppContext.Provider>
     </ToastProvider>
   );
