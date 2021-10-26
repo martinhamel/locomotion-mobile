@@ -6,7 +6,6 @@ const useTokens = (): [Tokens | null, (tokens: Tokens | null) => void] => {
   useEffect(() => {
     (async () => {
       const tokensString = await AsyncStorage.getItem("tokens");
-      console.log(tokensString);
       
       if (tokensString) {
         const oldTokens = JSON.parse(tokensString);

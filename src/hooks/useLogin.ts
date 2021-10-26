@@ -26,7 +26,7 @@ const useLogin = () => {
         toast.show("Connexion réussie", { type: "success" });
       } catch (e) {
         toast.show("Connexion non réussie", { type: "warning" });
-        console.log(e);
+        console.error(e);
       } 
     }
   };

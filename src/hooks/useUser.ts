@@ -25,7 +25,7 @@ const useUser = (
           setUser(newUser);
           setLoading(false);
         } catch (e: any) {
-          console.log(e);
+          console.error(e);
           
           if (e.response.status === 401) {
             setTokens(null);
