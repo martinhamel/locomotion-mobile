@@ -3,10 +3,10 @@ import { Text, View, StyleSheet } from "react-native";
 import { AppContext } from "../AppContext";
 import { Button, Card } from "react-native-paper";
 
-const Start = ({
+export default  ({
   navigation,
 }: {
-  navigation: { navigate: (target: string) => null };
+  navigation: { navigate: (target: string) => void };
 }) => {
   const { user } = useContext(AppContext) as AppContextType;
 
@@ -14,8 +14,8 @@ const Start = ({
     <View style={styles.start}>
       <Text style={styles.welcome}>Bienvenue {user?.name},</Text>
       <Card style={styles.card}>
-        <Card.Cover
-          source={{ uri: "../assets/img-vehicules.png" }}
+        <Card.Cover style={styles.cover}
+          source={require("../assets/img-vehicules.png")}
         ></Card.Cover>
         <Card.Content>
           <Text style={styles.text}>
@@ -30,25 +30,28 @@ const Start = ({
         </Card.Actions>
       </Card>
 
-      {/* <Card style={[styles.card, {backgroundColor: '#1e4847'}]}>
+      <Card style={[styles.card]}>
         <Card.Cover
-          style={[styles.cardAction]}
-          source={{uri: require("../assets/img-voiture2.png")}}
+          style={styles.cover}
+          source={require("../assets/img-voiture2.png")}
         >
-          <Text style={[styles.text, {backgroundColor: '#1e484747'}]}>
+        </Card.Cover>
+        <Card.Content>
+          <Text style={styles.text}>
             Vous possédez un véhicule à partager ?
           </Text>
-
+        </Card.Content>
+        <Card.Actions>
           <Button>Inscrivez-vous</Button>
-        </Card.Cover>
-      </Card> */}
+        </Card.Actions>
+      </Card>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   start: {
-    margin: 10,
+    margin: 5,
     flex: 1,
   },
   welcome: {
@@ -59,12 +62,13 @@ const styles = StyleSheet.create({
     fontFamily: "Brandon-bold",
     fontSize: 16,
     color: "#fff",
-    backgroundColor: "rgba(0, 173, 168, 0.77)",
   },
   card: {
     backgroundColor: "rgb(0, 173, 168)",
-    padding: 0,
+    margin: 5
   },
+  cover: {
+    backgroundColor: "rgb(0, 173, 168)",
+  }
 });
 
-export default Start;
