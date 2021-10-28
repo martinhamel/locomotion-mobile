@@ -18,7 +18,7 @@ const getImage = (l: Loanable) => {
 };
 
 export default () => {
-  const { loanables, loading: loadingLoanables } = useLoanables('bike');
+  const { loanables, loading: loadingLoanables } = useLoanables("bike");
 
   const loading = loadingLoanables ? (
     <ActivityIndicator style={styles.activity} color="#0000ff" />

@@ -23,7 +23,7 @@ const useLoanables = (type: LoanableType) => {
           },
         }
       );
-      
+
       const availableLoanables = await Promise.all(
         loanables.map(async (l) => {
           const {
@@ -49,7 +49,7 @@ const useLoanables = (type: LoanableType) => {
       setLoanables(filteredLoanables);
     })();
   }, [tokens?.access_token]);
-  return {loanables, loading};
+  return { loanables, loading };
 };
 
 export default useLoanables;

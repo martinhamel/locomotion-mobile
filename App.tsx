@@ -9,7 +9,6 @@ import { ActivityIndicator, StyleSheet, Text } from "react-native";
 import { useFonts } from "expo-font";
 
 const App = () => {
-  
   const [tokens, setTokens] = useTokens();
   const [user, loadingUser] = useUser(tokens, setTokens);
   const [fontsLoaded] = useFonts({

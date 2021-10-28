@@ -13,7 +13,7 @@ const useLogin = () => {
     setLoading(true);
     if (!tokens) {
       try {
-        const { data: tokens } : {data: Tokens} = await axios.post(
+        const { data: tokens }: { data: Tokens } = await axios.post(
           `${config.API_URL}/api/v1/auth/login`,
           {
             email,
@@ -27,11 +27,11 @@ const useLogin = () => {
       } catch (e) {
         toast.show("Connexion non réussie", { type: "warning" });
         console.error(e);
-      } 
+      }
     }
   };
 
-  return {login, loading};
+  return { login, loading };
 };
 
 export default useLogin;

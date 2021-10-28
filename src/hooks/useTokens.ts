@@ -6,7 +6,7 @@ const useTokens = (): [Tokens | null, (tokens: Tokens | null) => void] => {
   useEffect(() => {
     (async () => {
       const tokensString = await AsyncStorage.getItem("tokens");
-      
+
       if (tokensString) {
         const oldTokens = JSON.parse(tokensString);
         setTokens(oldTokens);
@@ -15,7 +15,6 @@ const useTokens = (): [Tokens | null, (tokens: Tokens | null) => void] => {
   }, [tokens?.access_token]);
 
   const setTokens2 = (tokens: Tokens | null) => {
-    
     AsyncStorage.setItem("tokens", JSON.stringify(tokens));
     setTokens(tokens);
   };

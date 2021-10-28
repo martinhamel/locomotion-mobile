@@ -24,26 +24,26 @@ type User = {
 };
 
 type Loanable = {
-  id: number,
-  name: string,
-  type: LoanableType,
+  id: number;
+  name: string;
+  type: LoanableType;
   position_google: {
-    lat: number,
-    lng: number
-  },
+    lat: number;
+    lng: number;
+  };
   image: {
-    url,
+    url;
     sizes: {
-      thumbnail: string
-    }
-  }
-}
+      thumbnail: string;
+    };
+  };
+};
 
-type LoanableType = "bike" | "car" | "trailer"
+type LoanableType = "bike" | "car" | "trailer";
 
 type AppContextType = {
   tokens: Tokens | null;
   setTokens: (token: Tokens | null) => void;
   user: User | null;
-  loadingUser: boolean
+  loadingUser: boolean;
 };

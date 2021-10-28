@@ -16,15 +16,23 @@ import Reserve from "./Reserve";
 const Drawer = createDrawerNavigator();
 
 const Home = () => {
-  const { user, loadingUser, setTokens } = useContext(AppContext) as AppContextType;
+  const { user, loadingUser, setTokens } = useContext(
+    AppContext
+  ) as AppContextType;
 
-  const content = loadingUser ? <ActivityIndicator style={styles.activity} color='#0000ff'/> : (
+  const content = loadingUser ? (
+    <ActivityIndicator style={styles.activity} color="#0000ff" />
+  ) : (
     <NavigationContainer>
       <Drawer.Navigator
         drawerContent={(props) => (
           <DrawerContentScrollView>
             <DrawerItemList {...props} />
-            <paperDrawer.Item  label='Déconnexion' icon='logout' onPress={() => setTokens(null)} />
+            <paperDrawer.Item
+              label="Déconnexion"
+              icon="logout"
+              onPress={() => setTokens(null)}
+            />
           </DrawerContentScrollView>
         )}
         screenOptions={({ navigation }) => ({
@@ -52,7 +60,7 @@ const Home = () => {
     </NavigationContainer>
   );
 
-  return content
+  return content;
 };
 
 const styles = StyleSheet.create({
@@ -66,8 +74,8 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   activity: {
-    height: '100%'
-  }
+    height: "100%",
+  },
 });
 
 export default Home;

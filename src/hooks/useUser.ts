@@ -8,7 +8,7 @@ const useUser = (
 ): [User | null, boolean] => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  
+
   useEffect(() => {
     if (tokens) {
       (async () => {
@@ -26,7 +26,7 @@ const useUser = (
           setLoading(false);
         } catch (e: any) {
           console.error(e);
-          
+
           if (e.response.status === 401) {
             setTokens(null);
           } else {
