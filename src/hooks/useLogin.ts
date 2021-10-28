@@ -4,7 +4,7 @@ import { AppContext } from "../../AppContext";
 import { useToast } from "react-native-toast-notifications";
 import config from "../config";
 
-const useLogin = () => {
+export default () => {
   const toast = useToast();
   const [loading, setLoading] = useState(false);
   const { tokens, setTokens } = useContext(AppContext) as AppContextType;
@@ -33,5 +33,3 @@ const useLogin = () => {
 
   return { login, loading };
 };
-
-export default useLogin;

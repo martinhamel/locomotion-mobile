@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import config from "../config";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const useUser = (
+export default (
   tokens: Tokens | null,
   setTokens: (token: Tokens | null) => void
 ): [User | null, boolean] => {
@@ -47,4 +47,3 @@ const useUser = (
   return [user, loading];
 };
 
-export default useUser;

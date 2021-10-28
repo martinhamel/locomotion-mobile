@@ -15,7 +15,7 @@ import Reserve from "./Reserve";
 
 const Drawer = createDrawerNavigator();
 
-const Home = () => {
+export default () => {
   const { user, loadingUser, setTokens } = useContext(
     AppContext
   ) as AppContextType;
@@ -77,5 +77,3 @@ const styles = StyleSheet.create({
     height: "100%",
   },
 });
-
-export default Home;

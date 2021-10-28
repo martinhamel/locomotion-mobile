@@ -8,7 +8,7 @@ import { AppContext } from "./AppContext";
 import { ActivityIndicator, StyleSheet, Text } from "react-native";
 import { useFonts } from "expo-font";
 
-const App = () => {
+export default () => {
   const [tokens, setTokens, loadingTokens] = useTokens();
   const [user, loadingUser] = useUser(tokens, setTokens);
   const [fontsLoaded] = useFonts({
@@ -33,4 +33,3 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;

@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../AppContext";
 import config from "../config";
 
-const useLoanables = (type: LoanableType) => {
+export default (type: LoanableType) => {
   const { tokens } = useContext(AppContext) as AppContextType;
   const [loading, setLoading] = useState(false);
   const [loanables, setLoanables] = useState<Loanable[]>();
@@ -74,4 +74,3 @@ const useLoanables = (type: LoanableType) => {
   return { loanables: filteredLoanables[type], loading };
 };
 
-export default useLoanables;

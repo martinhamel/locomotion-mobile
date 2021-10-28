@@ -9,7 +9,7 @@ import { Card, Button } from "react-native-paper";
 import React, { useState } from "react";
 import useLogin from "./hooks/useLogin";
 
-const Login = () => {
+export default () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { login, loading } = useLogin();
@@ -64,5 +64,3 @@ const styles = StyleSheet.create({
     width: "100%",
   },
 });
-
-export default Login;
