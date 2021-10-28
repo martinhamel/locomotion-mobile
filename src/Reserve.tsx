@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import useLoanables from "./hooks/useLoanables";
 import MapView, { Callout, Marker } from "react-native-maps";
+import { Avatar } from "react-native-elements/dist/avatar/Avatar";
 
 const getImage = (l: Loanable) => {
   if (l.type === "bike") return require("../assets/pins/bike-pin.png");
@@ -17,7 +18,7 @@ const getImage = (l: Loanable) => {
 };
 
 export default () => {
-  const {loanables, loading: loadingLoanables} = useLoanables();
+  const { loanables, loading: loadingLoanables } = useLoanables();
 
   const loading = loadingLoanables ? (
     <ActivityIndicator style={styles.activity} color="#0000ff" />
@@ -32,15 +33,14 @@ export default () => {
           }}
           key={l.id}
           title={l.name}
+          image={getImage(l)}
         >
-          <Image
-            height={43}
-            width={30}
-            source={getImage(l)}
-            resizeMode="contain"
-          />
           <Callout>
-            <View>
+            <View style={styles.callout}>
+              <Avatar
+                source={{ uri: l?.image?.sizes.thumbnail }}
+                rounded
+              />
               <Text>{l.name}</Text>
             </View>
           </Callout>
@@ -80,6 +80,12 @@ const styles = StyleSheet.create({
   activity: {
     height: "100%",
     position: "absolute",
-    zIndex: 99
+    zIndex: 99,
+  },
+  callout: {
+    flex: 1,
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
