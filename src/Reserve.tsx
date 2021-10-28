@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Image,
@@ -9,16 +9,17 @@ import {
 } from "react-native";
 import useLoanables from "./hooks/useLoanables";
 import MapView, { Callout, Marker } from "react-native-maps";
-import { Avatar } from "react-native-paper";
+import { Avatar, ToggleButton } from "react-native-paper";
 
-const getImage = (l: Loanable) => {
-  if (l.type === "bike") return require("../assets/pins/bike-pin.png");
-  else if (l.type === "car") return require("../assets/pins/car-pin.png");
+const getImage = (type: LoanableType) => {
+  if (type === "bike") return require("../assets/pins/bike-pin.png");
+  else if (type === "car") return require("../assets/pins/car-pin.png");
   else return require("../assets/pins/trailer-pin.png");
 };
 
 export default () => {
-  const { loanables, loading: loadingLoanables } = useLoanables("bike");
+  const [loanableType, setLoanableType] = useState<LoanableType>("bike");
+  const { loanables, loading: loadingLoanables } = useLoanables(loanableType);
 
   const loading = loadingLoanables ? (
     <ActivityIndicator style={styles.activity} color="#0000ff" />
@@ -32,8 +33,7 @@ export default () => {
             longitude: l.position_google.lng,
           }}
           key={l.id}
-          title={l.name}
-          image={getImage(l)}
+          image={getImage(l.type)}
         >
           <Callout>
             <View style={styles.callout}>
@@ -41,7 +41,7 @@ export default () => {
                 source={{ uri: l?.image?.sizes.thumbnail }}
                 size={36}
               />
-              <Text>{l.name}</Text>
+              <Text>{l?.name}</Text>
             </View>
           </Callout>
         </Marker>
@@ -50,6 +50,23 @@ export default () => {
   return (
     <View style={styles.container}>
       {loading}
+      <View style={styles.loanableTypeButtons}>
+        <ToggleButton
+          icon="bike"
+          status={loanableType === 'bike' ? 'checked': 'unchecked'}
+          onPress={() => setLoanableType("bike")}
+        />
+        <ToggleButton
+          icon="car"
+          status={loanableType === 'car' ? 'checked': 'unchecked'}
+          onPress={() => setLoanableType("car")}
+        />
+        <ToggleButton
+          icon="truck-trailer"
+          status={loanableType === 'trailer' ? 'checked': 'unchecked'}
+          onPress={() => setLoanableType("trailer")}
+        />
+      </View>
       <MapView
         style={styles.map}
         initialRegion={{
@@ -87,5 +104,12 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
+  },
+  loanableTypeButtons: {
+    position: "absolute",
+    right: 0,
+    top: 0,
+    zIndex: 1000,
+    backgroundColor: '#ddd8'
   },
 });
