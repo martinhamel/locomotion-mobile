@@ -5,21 +5,21 @@ import {
   View,
   ImageBackground,
 } from "react-native";
-import { Card, Button } from "react-native-elements";
+import { Card, Button } from "react-native-paper";
 import React, { useState } from "react";
 import useLogin from "./hooks/useLogin";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const {login, loading} = useLogin();
+  const { login, loading } = useLogin();
 
   return (
     <ImageBackground
       source={require("../assets/tandem.png")}
       style={styles.image}
     >
-      <Card containerStyle={styles.card}>
+      <Card style={styles.card}>
         <View style={styles.login}>
           <Text>courriel</Text>
           <TextInput
@@ -34,7 +34,9 @@ const Login = () => {
             onChangeText={setPassword}
             secureTextEntry={true}
           />
-          <Button title="connexion" disabled={loading} onPress={() => login(email, password)} />
+          <Button disabled={loading} onPress={() => login(email, password)}>
+            connexion
+          </Button>
         </View>
       </Card>
     </ImageBackground>

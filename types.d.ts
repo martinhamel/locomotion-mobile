@@ -26,7 +26,7 @@ type User = {
 type Loanable = {
   id: number,
   name: string,
-  type: string,
+  type: LoanableType,
   position_google: {
     lat: number,
     lng: number
@@ -38,6 +38,8 @@ type Loanable = {
     }
   }
 }
+
+type LoanableType = "bike" | "car" | "trailer"
 
 type AppContextType = {
   tokens: Tokens | null;

@@ -8,10 +8,9 @@ import {
   DrawerItem,
   DrawerItemList,
 } from "@react-navigation/drawer";
-import { Avatar } from "react-native-elements";
+import { Avatar, Drawer as paperDrawer } from "react-native-paper";
 import { AppContext } from "../AppContext";
 import "react-native-gesture-handler";
-import { Icon } from "react-native-elements/dist/icons/Icon";
 import Reserve from "./Reserve";
 
 const Drawer = createDrawerNavigator();
@@ -25,20 +24,16 @@ const Home = () => {
         drawerContent={(props) => (
           <DrawerContentScrollView>
             <DrawerItemList {...props} />
-            <DrawerItem
-              label="déconnexion"
-              icon={() => <Icon name="logout" />}
-              onPress={() => setTokens(null)}
-            />
+            <paperDrawer.Item  label='Déconnexion' icon='logout' onPress={() => setTokens(null)} />
           </DrawerContentScrollView>
         )}
         screenOptions={({ navigation }) => ({
           headerLeft: () => (
-            <Avatar
-              containerStyle={styles.avatar}
-              rounded
+            <Avatar.Image
+              style={styles.avatar}
               source={{ uri: user?.avatar?.sizes?.thumbnail }}
-              onPress={() => navigation.toggleDrawer()}
+              onTouchStart={() => navigation.toggleDrawer()}
+              size={36}
             />
           ),
         })}

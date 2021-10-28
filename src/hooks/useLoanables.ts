@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../AppContext";
 import config from "../config";
 
-const useLoanables = () => {
+const useLoanables = (type: LoanableType) => {
   const { tokens } = useContext(AppContext) as AppContextType;
   const [loading, setLoading] = useState(false);
   const [loanables, setLoanables] = useState<Loanable[]>();
@@ -16,13 +16,14 @@ const useLoanables = () => {
       const {
         data: { data: loanables },
       }: { data: { data: [Loanable] } } = await axios.get(
-        `${config.API_URL}/api/v1/loanables?order=name&page=1&per_page=900&q=&fields=id,type,name,position_google,available,owner.user.id,owner.user.name,owner.user.full_name,owner.user.avatar,image.*`,
+        `${config.API_URL}/api/v1/loanables?order=name&page=1&per_page=900&type=${type}&q=&fields=id,type,name,position_google,available,owner.user.id,owner.user.name,owner.user.full_name,owner.user.avatar,image.*`,
         {
           headers: {
             Authorization: `Bearer ${tokens?.access_token}`,
           },
         }
       );
+      
       const availableLoanables = await Promise.all(
         loanables.map(async (l) => {
           const {
