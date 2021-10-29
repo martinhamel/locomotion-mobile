@@ -3,7 +3,7 @@ import { Text, View, StyleSheet } from "react-native";
 import { AppContext } from "../AppContext";
 import { Button, Card } from "react-native-paper";
 
-export default  ({
+export default ({
   navigation,
 }: {
   navigation: { navigate: (target: string) => void };
@@ -14,7 +14,8 @@ export default  ({
     <View style={styles.start}>
       <Text style={styles.welcome}>Bienvenue {user?.name},</Text>
       <Card style={styles.card}>
-        <Card.Cover style={styles.cover}
+        <Card.Cover
+          style={styles.cover}
           source={require("../assets/img-vehicules.png")}
         ></Card.Cover>
         <Card.Content>
@@ -34,8 +35,7 @@ export default  ({
         <Card.Cover
           style={styles.cover}
           source={require("../assets/img-voiture2.png")}
-        >
-        </Card.Cover>
+        ></Card.Cover>
         <Card.Content>
           <Text style={styles.text}>
             Vous possédez un véhicule à partager ?
@@ -65,10 +65,9 @@ const styles = StyleSheet.create({
   },
   card: {
     backgroundColor: "rgb(0, 173, 168)",
-    margin: 5
+    margin: 5,
   },
   cover: {
     backgroundColor: "rgb(0, 173, 168)",
-  }
+  },
 });
-

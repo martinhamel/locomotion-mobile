@@ -3,13 +3,21 @@ import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../AppContext";
 import config from "../config";
 
-export default (type: LoanableType) => {
+export default (
+  type: LoanableType | null,
+  startTime: Date | null,
+  duration: number | null
+) => {
   const { tokens } = useContext(AppContext) as AppContextType;
   const [loading, setLoading] = useState(false);
   const [loanables, setLoanables] = useState<Loanable[]>();
-  const [filteredLoanables, setFilteredLoanables] = useState<{bike: Loanable[], car: Loanable[], trailer: Loanable[]}>({bike: [], car: [], trailer: []});
+  const [filteredLoanables, setFilteredLoanables] = useState<{
+    bike: Loanable[];
+    car: Loanable[];
+    trailer: Loanable[];
+  }>({ bike: [], car: [], trailer: [] });
 
-  // We are loading all the loanables 
+  // We are loading all the loanables
   useEffect(() => {
     (async () => {
       setLoading(true);
@@ -24,25 +32,25 @@ export default (type: LoanableType) => {
         }
       );
       setLoading(false);
-      setLoanables(loanables);      
+      setLoanables(loanables);
     })();
   }, [tokens?.access_token]);
 
   // testing loanables to know if they are available.
   // We are doing it in 2 steps because it is too slow to do all on the 1st effect.
   useEffect(() => {
-    if (loanables) {
-      if(filteredLoanables[type].length > 0){
-        return
+    if (loanables && startTime && duration && type) {
+      if (filteredLoanables[type].length > 0) {
+        return;
       }
       setLoading(true);
-      setFilteredLoanables({...filteredLoanables, [type]: []});
+      setFilteredLoanables({ ...filteredLoanables, [type]: [] });
       (async () => {
         const availableLoanables = await Promise.all(
           loanables
-            .filter(l => l.type === type)
+            .filter((l) => l.type === type)
             .map(async (l) => {
-              try{
+              try {
                 const {
                   data: { available },
                 } = await axios.get(
@@ -54,23 +62,20 @@ export default (type: LoanableType) => {
                   }
                 );
                 return { loanable: l, available };
-              }catch (e) {
+              } catch (e) {
                 console.error(e);
-                return {loanable: l, available: false}
+                return { loanable: l, available: false };
               }
             })
         );
         const filteredAvailableLoanables = availableLoanables.filter(
           (l) => l.available
         );
-        const floanables = filteredAvailableLoanables.map(
-          (l) => l.loanable
-        );
+        const floanables = filteredAvailableLoanables.map((l) => l.loanable);
         setLoading(false);
-        setFilteredLoanables({...filteredLoanables, [type]: floanables});
+        setFilteredLoanables({ ...filteredLoanables, [type]: floanables });
       })();
     }
-  }, [loanables, type]);
-  return { loanables: filteredLoanables[type], loading };
+  }, [loanables, type, startTime, duration]);
+  return { loanables: type ? filteredLoanables[type] : loanables, loading };
 };
-

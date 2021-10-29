@@ -17,7 +17,7 @@ export default (
           setLoading(true);
           const cachedUserString = await AsyncStorage.getItem("user");
           if (cachedUserString) {
-            setLoading(false); 
+            setLoading(false);
             setUser(JSON.parse(cachedUserString));
           }
           const { data: newUser }: { data: User } = await axios.get(
@@ -46,4 +46,3 @@ export default (
 
   return [user, loading];
 };
-

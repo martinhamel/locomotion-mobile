@@ -21,7 +21,11 @@ export default () => {
   return (
     <ToastProvider>
       <AppContext.Provider value={{ tokens, setTokens, user, loadingUser }}>
-        {loadingTokens || !fontsLoaded? <ActivityIndicator color="#0000ff"/> :  screen}
+        {loadingTokens || !fontsLoaded ? (
+          <ActivityIndicator color="#0000ff" />
+        ) : (
+          screen
+        )}
       </AppContext.Provider>
     </ToastProvider>
   );
@@ -32,4 +36,3 @@ const styles = StyleSheet.create({
     height: "100%",
   },
 });
-

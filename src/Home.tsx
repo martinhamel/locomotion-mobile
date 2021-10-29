@@ -11,7 +11,7 @@ import {
 import { Avatar, Drawer as paperDrawer } from "react-native-paper";
 import { AppContext } from "../AppContext";
 import "react-native-gesture-handler";
-import Reserve from "./Reserve";
+import Reserve from "./reserve/Reserve";
 
 const Drawer = createDrawerNavigator();
 
