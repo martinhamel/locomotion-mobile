@@ -38,25 +38,25 @@ export default () => {
 
   const markers = loanables
     ? loanables.map((l) => (
-      <Marker
-        coordinate={{
-          latitude: l.position_google.lat,
-          longitude: l.position_google.lng,
-        }}
-        key={l.id}
-        image={getImage(l.type)}
-      >
-        <Callout>
-          <View style={styles.callout}>
-            <Avatar.Image
-              source={{ uri: l?.image?.sizes.thumbnail }}
-              size={36}
-            />
-            <Text>{l?.name}</Text>
-          </View>
-        </Callout>
-      </Marker>
-    ))
+        <Marker
+          coordinate={{
+            latitude: l.position_google.lat,
+            longitude: l.position_google.lng,
+          }}
+          key={l.id}
+          image={getImage(l.type)}
+        >
+          <Callout>
+            <View style={styles.callout}>
+              <Avatar.Image
+                source={{ uri: l?.image?.sizes.thumbnail }}
+                size={36}
+              />
+              <Text>{l?.name}</Text>
+            </View>
+          </Callout>
+        </Marker>
+      ))
     : null;
   return (
     <View style={styles.container}>
@@ -93,7 +93,6 @@ export default () => {
           setFlowState={setFlowState}
         />
       </View>
-
     </View>
   );
 };
@@ -108,7 +107,7 @@ const styles = StyleSheet.create({
   map: {
     width: Dimensions.get("window").width,
     height: Dimensions.get("window").height,
-    zIndex: 0
+    zIndex: 0,
   },
   activity: {
     height: "100%",

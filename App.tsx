@@ -7,7 +7,7 @@ import useTokens from "./src/hooks/useTokens";
 import { AppContext } from "./AppContext";
 import { ActivityIndicator, StyleSheet, Text } from "react-native";
 import { useFonts } from "expo-font";
-import { Provider as PaperProvider } from 'react-native-paper';
+import { Provider as PaperProvider } from "react-native-paper";
 
 export default () => {
   const [tokens, setTokens, loadingTokens] = useTokens();
