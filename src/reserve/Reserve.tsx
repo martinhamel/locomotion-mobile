@@ -8,12 +8,11 @@ import {
   ActivityIndicator,
 } from "react-native";
 import useLoanables from "../hooks/useLoanables";
-import MapView, { Callout, LocalTile, Marker } from "react-native-maps";
-import { Avatar, ToggleButton, Card } from "react-native-paper";
-import DateTimePicker from "@react-native-community/datetimepicker";
-import { formatRelative, formatDistance, format, add } from "date-fns";
-import { fr } from "date-fns/locale";
+import MapView, { Callout, Marker } from "react-native-maps";
+import { Avatar, Card } from "react-native-paper";
 import ChooseLoanable from "./ChooseLoanable";
+import ChooseTime from "./ChooseTime";
+import ChooseDuration from "./ChooseDuration";
 
 const getImage = (type: LoanableType) => {
   if (type === "bike") return require("../../assets/pins/bike-pin.png");
@@ -23,21 +22,14 @@ const getImage = (type: LoanableType) => {
 
 export default () => {
   const [loanableType, setLoanableType] = useState<LoanableType | null>(null);
-  const [startTime, setStartTime] = useState<Date | null>(null);
-  const [durationInMinutes, setDuration] = useState<number | null>(null);
+  const [startTime, setStartTime] = useState<Date | undefined>(undefined);
+  const [durationInMinutes, setDuration] = useState<number>(60);
+  const [flowSate, setFlowState] =
+    useState<ReserveFlowState>("1-setLoanableType");
   const { loanables, loading: loadingLoanables } = useLoanables(
     loanableType,
     startTime,
     durationInMinutes
-  );
-
-  const formatedStartDate = format(startTime ?? new Date(), "d MMM à H:m", {
-    locale: fr,
-  });
-  const formatedDuration = formatDistance(
-    startTime ?? new Date(),
-    add(startTime ?? new Date(), { minutes: durationInMinutes ?? 60 }),
-    { locale: fr }
   );
 
   const loading = loadingLoanables ? (
@@ -72,16 +64,24 @@ export default () => {
       <ChooseLoanable
         loanableType={loanableType}
         setLoanableType={setLoanableType}
+        flowState={flowSate}
+        setFlowState={setFlowState}
       />
+      <View style={styles.time}>
+        <ChooseTime
+          startTime={startTime}
+          setStartTime={setStartTime}
+          flowState={flowSate}
+          setFlowState={setFlowState}
+        />
+        <ChooseDuration
+          durationInMinutes={durationInMinutes}
+          startTime={startTime}
+          flowState={flowSate}
+          setFlowState={setFlowState}
+        />
+      </View>
 
-      <Card style={styles.timeCard}>
-        <Card.Content>
-          <Text>véhicules disponibles</Text>
-          <Text>le: {formatedStartDate}</Text>
-          <Text>pendant {formatedDuration}</Text>
-        </Card.Content>
-      </Card>
-      
       <MapView
         style={styles.map}
         initialRegion={{
@@ -120,9 +120,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  timeCard: {
+  time: {
     position: "absolute",
-    zIndex: 10,
     left: 0,
     top: 0,
   },

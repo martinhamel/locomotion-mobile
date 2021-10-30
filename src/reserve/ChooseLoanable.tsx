@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
   StyleSheet,
-  Animated,
   NativeModules,
   LayoutAnimation,
 } from "react-native";
@@ -17,16 +16,20 @@ UIManager.setLayoutAnimationEnabledExperimental &&
 export default ({
   loanableType,
   setLoanableType,
+  flowState,
+  setFlowState,
 }: {
   loanableType: LoanableType | null;
   setLoanableType: (loanableType: LoanableType) => void;
+  flowState: ReserveFlowState;
+  setFlowState: (state: ReserveFlowState) => void;
 }) => {
   const buttons = (
     <View
       style={
-        loanableType
-          ? styles.loanableTypeButtonsAlone
-          : styles.loanableTypeButtonsCard
+        flowState === "1-setLoanableType"
+          ? styles.loanableTypeButtonsCard
+          : styles.loanableTypeButtonsAlone
       }
     >
       <ToggleButton
@@ -35,6 +38,7 @@ export default ({
         onPress={() => {
           LayoutAnimation.easeInEaseOut();
           setLoanableType("bike");
+          if (flowState === "1-setLoanableType") setFlowState("2-setStartDate");
         }}
       />
       <ToggleButton
@@ -43,6 +47,7 @@ export default ({
         onPress={() => {
           LayoutAnimation.easeInEaseOut();
           setLoanableType("car");
+          if (flowState === "1-setLoanableType") setFlowState("2-setStartDate");
         }}
       />
       <ToggleButton
@@ -51,25 +56,25 @@ export default ({
         onPress={() => {
           LayoutAnimation.easeInEaseOut();
           setLoanableType("trailer");
+          if (flowState === "1-setLoanableType") setFlowState("2-setStartDate");
         }}
       />
     </View>
   );
 
-  if (loanableType) {
+  if (flowState === "1-setLoanableType") {
     return (
-      <Card style={styles.cardSmall}>
+      <Card style={styles.card}>
+        <Card.Title title="Vous voulez" />
+        <Card.Content>
+          <Text>Vélo, automobile ou remorque ?</Text>
+        </Card.Content>
         <Card.Actions>{buttons}</Card.Actions>
       </Card>
     );
   }
-
   return (
-    <Card style={styles.card}>
-      <Card.Title title="Vous voulez" />
-      <Card.Content>
-        <Text>Vélo, automobile ou remorque ?</Text>
-      </Card.Content>
+    <Card style={styles.cardSmall}>
       <Card.Actions>{buttons}</Card.Actions>
     </Card>
   );

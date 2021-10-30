@@ -5,7 +5,7 @@ import config from "../config";
 
 export default (
   type: LoanableType | null,
-  startTime: Date | null,
+  startTime: Date | undefined,
   duration: number | null
 ) => {
   const { tokens } = useContext(AppContext) as AppContextType;
