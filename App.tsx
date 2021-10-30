@@ -7,6 +7,7 @@ import useTokens from "./src/hooks/useTokens";
 import { AppContext } from "./AppContext";
 import { ActivityIndicator, StyleSheet, Text } from "react-native";
 import { useFonts } from "expo-font";
+import { Provider as PaperProvider } from 'react-native-paper';
 
 export default () => {
   const [tokens, setTokens, loadingTokens] = useTokens();
@@ -20,13 +21,15 @@ export default () => {
 
   return (
     <ToastProvider>
-      <AppContext.Provider value={{ tokens, setTokens, user, loadingUser }}>
-        {loadingTokens || !fontsLoaded ? (
-          <ActivityIndicator color="#0000ff" />
-        ) : (
-          screen
-        )}
-      </AppContext.Provider>
+      <PaperProvider>
+        <AppContext.Provider value={{ tokens, setTokens, user, loadingUser }}>
+          {loadingTokens || !fontsLoaded ? (
+            <ActivityIndicator color="#0000ff" />
+          ) : (
+            screen
+          )}
+        </AppContext.Provider>
+      </PaperProvider>
     </ToastProvider>
   );
 };

@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import useLoanables from "../hooks/useLoanables";
 import MapView, { Callout, Marker } from "react-native-maps";
-import { Avatar, Card } from "react-native-paper";
+import { Avatar, Card, Portal } from "react-native-paper";
 import ChooseLoanable from "./ChooseLoanable";
 import ChooseTime from "./ChooseTime";
 import ChooseDuration from "./ChooseDuration";
@@ -38,28 +38,40 @@ export default () => {
 
   const markers = loanables
     ? loanables.map((l) => (
-        <Marker
-          coordinate={{
-            latitude: l.position_google.lat,
-            longitude: l.position_google.lng,
-          }}
-          key={l.id}
-          image={getImage(l.type)}
-        >
-          <Callout>
-            <View style={styles.callout}>
-              <Avatar.Image
-                source={{ uri: l?.image?.sizes.thumbnail }}
-                size={36}
-              />
-              <Text>{l?.name}</Text>
-            </View>
-          </Callout>
-        </Marker>
-      ))
+      <Marker
+        coordinate={{
+          latitude: l.position_google.lat,
+          longitude: l.position_google.lng,
+        }}
+        key={l.id}
+        image={getImage(l.type)}
+      >
+        <Callout>
+          <View style={styles.callout}>
+            <Avatar.Image
+              source={{ uri: l?.image?.sizes.thumbnail }}
+              size={36}
+            />
+            <Text>{l?.name}</Text>
+          </View>
+        </Callout>
+      </Marker>
+    ))
     : null;
   return (
     <View style={styles.container}>
+      <MapView
+        style={styles.map}
+        initialRegion={{
+          latitude: 45.5359968,
+          longitude: -73.6013709,
+          latitudeDelta: 0.09,
+          longitudeDelta: 0.04,
+        }}
+        mapType={"terrain"}
+      >
+        {markers}
+      </MapView>
       {loading}
       <ChooseLoanable
         loanableType={loanableType}
@@ -82,18 +94,6 @@ export default () => {
         />
       </View>
 
-      <MapView
-        style={styles.map}
-        initialRegion={{
-          latitude: 45.5359968,
-          longitude: -73.6013709,
-          latitudeDelta: 0.09,
-          longitudeDelta: 0.04,
-        }}
-        mapType={"terrain"}
-      >
-        {markers}
-      </MapView>
     </View>
   );
 };
@@ -108,6 +108,7 @@ const styles = StyleSheet.create({
   map: {
     width: Dimensions.get("window").width,
     height: Dimensions.get("window").height,
+    zIndex: 0
   },
   activity: {
     height: "100%",
