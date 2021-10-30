@@ -37,9 +37,9 @@ export default ({
         mode="date"
         onChange={(_e: any, date: Date | undefined) => {
           if (date) {
-            if (flowState === "2-setStartDate") setFlowState("3-setStartTime");
             setStartTime(date);
             setShowDatePicker(false);
+            if (flowState === "2-setStartDate") setFlowState("3-setStartTime");
           }
         }}
       />
@@ -53,9 +53,9 @@ export default ({
         is24Hour={true}
         onChange={(_e: any, date: Date | undefined) => {
           if (date) {
-            if (flowState === "3-setStartTime") setFlowState("4-setDuration");
             setStartTime(date);
             setShowTimePicker(false);
+            if (flowState === "3-setStartTime") setFlowState("4-setDuration");
           }
         }}
       />
