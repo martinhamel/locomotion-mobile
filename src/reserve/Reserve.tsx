@@ -7,7 +7,7 @@ import {
   Dimensions,
   ActivityIndicator,
 } from "react-native";
-import useLoanables from "../hooks/useLoanables";
+import useLoanables from "./useLoanables";
 import MapView, { Callout, Marker } from "react-native-maps";
 import { Avatar, Card, Portal } from "react-native-paper";
 import ChooseLoanable from "./ChooseLoanable";

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Button, Card, Text } from "react-native-paper";
 import { LayoutAnimation, StyleSheet, View } from "react-native";
 import { format } from "date-fns";
@@ -29,33 +29,34 @@ export default ({
         locale: fr,
       })
     : "heure";
-
+  console.log(flowState, showDatePicker, startTime);
+  
   const datePicker =
     flowState === "2-setStartDate" || showDatePicker ? (
       <DateTimePicker
         value={startTime || new Date()}
         mode="date"
         onChange={(_e: any, date: Date | undefined) => {
+          setShowDatePicker(false);
           if (date) {
-            setStartTime(date);
-            setShowDatePicker(false);
             if (flowState === "2-setStartDate") setFlowState("3-setStartTime");
+            setStartTime(date);
           }
         }}
       />
     ) : null;
 
   const timePicker =
-    flowState === "3-setStartTime" || showTimePicker ? (
+    startTime && (flowState === "3-setStartTime" || showTimePicker) ? (
       <DateTimePicker
         value={startTime || new Date()}
         mode="time"
         is24Hour={true}
         onChange={(_e: any, date: Date | undefined) => {
+          setShowTimePicker(false);
           if (date) {
-            setStartTime(date);
-            setShowTimePicker(false);
             if (flowState === "3-setStartTime") setFlowState("4-setDuration");
+            setStartTime(date);
           }
         }}
       />
