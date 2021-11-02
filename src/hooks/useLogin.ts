@@ -21,12 +21,13 @@ export default () => {
             rememberMe: false,
           }
         );
-        setLoading(false);
         setTokens(tokens);
         toast.show("Connexion réussie", { type: "success" });
       } catch (e) {
         toast.show("Connexion non réussie", { type: "warning" });
         console.error(e);
+      } finally{
+        setLoading(false);
       }
     }
   };
