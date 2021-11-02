@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
   card: {
     backgroundColor: "rgba(256, 256, 256, 0.95)",
     width: '90%',
+    maxWidth: 400
   },
   image: {
     flex: 1,
