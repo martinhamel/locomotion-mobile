@@ -6,7 +6,7 @@ import {
   NativeModules,
   LayoutAnimation,
 } from "react-native";
-import { Card, ToggleButton } from "react-native-paper";
+import { Card, Dialog, ToggleButton } from "react-native-paper";
 
 const { UIManager } = NativeModules;
 
@@ -64,13 +64,13 @@ export default ({
 
   if (flowState === "1-setLoanableType") {
     return (
-      <Card style={styles.card}>
-        <Card.Title title="Vous voulez" />
-        <Card.Content>
+      <Dialog visible={true}>
+        <Dialog.Title>Vous voulez</Dialog.Title>
+        <Dialog.Content>
           <Text>Vélo, automobile ou remorque ?</Text>
-        </Card.Content>
-        <Card.Actions>{buttons}</Card.Actions>
-      </Card>
+        </Dialog.Content>
+        <Dialog.Actions>{buttons}</Dialog.Actions>
+      </Dialog>
     );
   }
   return (
@@ -88,10 +88,6 @@ const styles = StyleSheet.create({
   loanableTypeButtonsCard: {
     display: "flex",
     flexDirection: "row",
-  },
-  card: {
-    position: "absolute",
-    zIndex: 20,
   },
   cardSmall: {
     position: "absolute",
