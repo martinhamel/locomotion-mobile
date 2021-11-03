@@ -38,7 +38,7 @@ export default ({
         onPress={() => {
           LayoutAnimation.easeInEaseOut();
           setLoanableType("bike");
-          if (flowState === "1-setLoanableType") setFlowState("2-setStartDate");
+          if (flowState === "1-setLoanableType") setFlowState("2-setStartTime");
         }}
       />
       <ToggleButton
@@ -47,7 +47,7 @@ export default ({
         onPress={() => {
           LayoutAnimation.easeInEaseOut();
           setLoanableType("car");
-          if (flowState === "1-setLoanableType") setFlowState("2-setStartDate");
+          if (flowState === "1-setLoanableType") setFlowState("2-setStartTime");
         }}
       />
       <ToggleButton
@@ -56,7 +56,7 @@ export default ({
         onPress={() => {
           LayoutAnimation.easeInEaseOut();
           setLoanableType("trailer");
-          if (flowState === "1-setLoanableType") setFlowState("2-setStartDate");
+          if (flowState === "1-setLoanableType") setFlowState("2-setStartTime");
         }}
       />
     </View>

@@ -1,6 +1,5 @@
 type ReserveFlowState =
   | "1-setLoanableType"
-  | "2-setStartDate"
-  | "3-setStartTime"
-  | "4-setDuration"
-  | "5-done";
+  | "2-setStartTime"
+  | "3-setDuration"
+  | "4-done";

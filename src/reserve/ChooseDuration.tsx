@@ -1,6 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { Button, Card, Portal, Text } from "react-native-paper";
-import { LayoutAnimation, StyleSheet, View } from "react-native";
+import React, { useState } from "react";
+import {
+  Button,
+  Card,
+  Dialog,
+  Portal,
+  RadioButton,
+  Text,
+  TextInput,
+  ToggleButton,
+} from "react-native-paper";
+import { StyleSheet, View } from "react-native";
 import { formatDistance, add } from "date-fns";
 import { fr } from "date-fns/locale";
 
@@ -16,18 +25,54 @@ export default ({
   setFlowState: (state: ReserveFlowState) => void;
 }) => {
   const [showDuration, setShowDuration] = useState(false);
+  const [time, setTime] = useState(durationInMinutes);
+  const [timeUnit, setTimeUnit] = useState<"minutes" | "hours" | "days">(
+    "minutes"
+  );
 
   return showDuration ? (
     <Portal>
-      <View style={styles.cardContainer}>
-        <Card style={styles.timeCardBig}>
-          <Card.Title title="Durée" />
-          <Card.Content>
-            <Text>Pendant combien de temps partez-vous ?</Text>
-          </Card.Content>
-          {/* <Card.Actions></Card.Actions> */}
-        </Card>
-      </View>
+      <Dialog visible={true} style={styles.timeCardBig}>
+        <Dialog.Title>Durée</Dialog.Title>
+        <Dialog.Content>
+          <Text>Pendant combien de temps partez-vous ?</Text>
+          <TextInput
+            style={styles.input}
+            value={`${time}`}
+            onChangeText={(text) => {
+              const newTime = text === "" ? 0 : parseInt(text);
+              if (Number.isNaN(newTime)) {
+                setTime(time);
+              } else {
+                setTime(newTime);
+              }
+            }}
+            keyboardType="number-pad"
+            autoFocus={true}
+          />
+          <View>
+            <View style={styles.radio}>
+              <RadioButton
+                value="minutes"
+                status={"minutes" === timeUnit ? "checked" : "unchecked"}
+                onPress={() => setTimeUnit("minutes")}
+              />
+              <Text>minutes</Text>
+            </View>
+            <View style={styles.radio}>
+              <RadioButton
+                value="hours"
+                status={"hours" === timeUnit ? "checked" : "unchecked"}
+                onPress={() => setTimeUnit("hours")}
+              />
+              <Text>heures</Text>
+            </View>
+          </View>
+        </Dialog.Content>
+        <Dialog.Actions>
+          <Button onPress={() => setShowDuration(false)}>Ok</Button>
+        </Dialog.Actions>
+      </Dialog>
     </Portal>
   ) : (
     <Card style={styles.timeCardSmall}>
@@ -59,7 +104,14 @@ const styles = StyleSheet.create({
   },
   cardContainer: {
     flex: 1,
-    justifyContent:'center',
-    alignItems: 'center'
-  }
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  input: {
+    width: 100,
+  },
+  radio: {
+    flex: 1,
+    flexDirection: "row",
+  },
 });

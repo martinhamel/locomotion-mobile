@@ -22,8 +22,8 @@ const getImage = (type: LoanableType) => {
 
 export default () => {
   const [loanableType, setLoanableType] = useState<LoanableType | null>(null);
-  const [startTime, setStartTime] = useState<Date | undefined>(undefined);
-  const [durationInMinutes, setDuration] = useState<number>(60);
+  const [startTime, setStartTime] = useState(new Date());
+  const [durationInMinutes, setDuration] = useState(60);
   const [flowSate, setFlowState] =
     useState<ReserveFlowState>("1-setLoanableType");
   const { loanables, loading: loadingLoanables } = useLoanables(
